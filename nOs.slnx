@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+  </Configurations>
+  <Project Path="Boost/Boost.vcxproj" Id="311161d9-31a3-4445-9642-979bb354faa2" />
+  <Project Path="nOs/nOs.vcxproj" Id="51277895-023f-4c9e-a3c0-06ee647fc3c7" />
+</Solution>
