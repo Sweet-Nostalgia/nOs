@@ -11,12 +11,16 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="log\Logger.h" />
+    <ClInclude Include="src\nOs\Log.h" />
     <ClInclude Include="src\nOs.h" />
     <ClInclude Include="src\nOs\Application.h" />
     <ClInclude Include="src\nOs\Core.h" />
     <ClInclude Include="src\nOs\EntryPoint.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="log\Logger.cpp" />
+    <ClCompile Include="src\nOs\Log.cpp" />
     <ClCompile Include="src\nOs\Application.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -67,6 +71,7 @@
       <PreprocessorDefinitions>NOS_PLATFORM_WINDOWS;NOS_BUILD_DLL;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)nOs\log;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -85,6 +90,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)nOs\log;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
