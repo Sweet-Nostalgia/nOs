@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Dev\nOs\CMakeFiles\nOs.dir\cmake_pch.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Dev\nOs\nOs\log\Logger.cpp">
+      <Filter>Log</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Dev\nOs\nOs\src\nOs\Application.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Dev\nOs\nOs\src\nOs\Log.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Dev\nOs\nOs\src\nOs\Layer.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Dev\nOs\nOs\src\nOs\LayerStack.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Dev\nOs\nOs\src\Platform\WindowsWindow.cpp">
+      <Filter>Platform\Win32</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Dev\nOs\nOs\src\nospch.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Dev\nOs\nOs\log\Logger.h">
+      <Filter>Log</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Dev\nOs\nOs\src\nOs\Events\ApplicationEvent.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Dev\nOs\nOs\src\nOs\Events\Event.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Dev\nOs\nOs\src\nOs\Events\KeyEvent.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Dev\nOs\nOs\src\nOs\Events\MouseEvent.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Dev\nOs\nOs\src\nOs\Application.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Dev\nOs\nOs\src\nOs\Core.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Dev\nOs\nOs\src\nOs\EntryPoint.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Dev\nOs\nOs\src\nOs\Log.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Dev\nOs\nOs\src\nOs\Layer.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Dev\nOs\nOs\src\nOs\LayerStack.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Dev\nOs\nOs\src\nOs\Window.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Dev\nOs\nOs\src\Platform\WindowsWindow.h">
+      <Filter>Platform\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Dev\nOs\nOs\src\nOs.h" />
+    <ClInclude Include="C:\Dev\nOs\nOs\src\nospch.h" />
+    <ClInclude Include="C:\Dev\nOs\CMakeFiles\nOs.dir\Debug\cmake_pch.hxx">
+      <Filter>Precompile Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Dev\nOs\CMakeFiles\nOs.dir\Release\cmake_pch.hxx">
+      <Filter>Precompile Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Dev\nOs\CMakeFiles\nOs.dir\MinSizeRel\cmake_pch.hxx">
+      <Filter>Precompile Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Dev\nOs\CMakeFiles\nOs.dir\RelWithDebInfo\cmake_pch.hxx">
+      <Filter>Precompile Header File</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Dev\nOs\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Core">
+      <UniqueIdentifier>{5145322C-B662-3F6D-8FA5-C5DFB884FAFF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Events">
+      <UniqueIdentifier>{D73FB2C0-4FF0-3F6B-8740-3888C3011CEA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Log">
+      <UniqueIdentifier>{BF32949A-AC58-3265-AB19-65394B643323}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform">
+      <UniqueIdentifier>{B011FC49-A1A9-35D3-A16F-EDA9ECD3D4A9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform\Win32">
+      <UniqueIdentifier>{1556B093-0FF0-389D-A750-C65C6A63194D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Precompile Header File">
+      <UniqueIdentifier>{3F942B7A-5E21-3282-A576-EF18D4A15BA5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{6246098D-156B-3A7A-861A-33BFB1830ACC}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

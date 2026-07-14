@@ -1,7 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <Solution>
-  <Configurations>
-    <Platform Name="x64" />
-  </Configurations>
-  <Project Path="Boost/Boost.vcxproj" Id="311161d9-31a3-4445-9642-979bb354faa2" />
-  <Project Path="nOs/nOs.vcxproj" Id="51277895-023f-4c9e-a3c0-06ee647fc3c7" />
+	<Configurations>
+		<BuildType Name="Debug"/>
+		<BuildType Name="Release"/>
+		<BuildType Name="MinSizeRel"/>
+		<BuildType Name="RelWithDebInfo"/>
+		<Platform Name="x64"/>
+	</Configurations>
+	<Project Path="ALL_BUILD.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="5358e8b4-6415-363f-a578-cd93506049e9" DefaultStartup="true">
+		<BuildDependency Project="Boost.vcxproj"/>
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="nOs.vcxproj"/>
+		<Build Solution="Debug|*" Project="false"/>
+		<Build Solution="Release|*" Project="false"/>
+		<Build Solution="MinSizeRel|*" Project="false"/>
+		<Build Solution="RelWithDebInfo|*" Project="false"/>
+	</Project>
+	<Project Path="Boost.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="3986084d-27e3-3dac-bcfc-ad51a6665462">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="nOs.vcxproj"/>
+	</Project>
+	<Project Path="ZERO_CHECK.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="b20eb389-0c41-3218-a17c-84851d839562"/>
+	<Project Path="nOs.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="77e2b991-f01f-35a2-aedd-65bcf150787a">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+	</Project>
 </Solution>

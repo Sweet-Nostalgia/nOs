@@ -1,8 +1,19 @@
 # Directories
 .vs/
+ALL_BUILD.dir/
 bin/
 bin-int/
-Run/
+Boost.dir/
+build/
+CMakeFiles/
+Debug/
+nOs.dir/
+out/
+x64/
+ZERO_CHECK.dir/
 
 #Files
+*.bat
+*.cmake
 *.user
+CMakeCache.txt
