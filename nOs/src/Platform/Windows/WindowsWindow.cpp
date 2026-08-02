@@ -67,6 +67,104 @@ namespace nOs {
 		NOS_CORE_ASSERT(m_Window, "Could not create the Win32 Window!");
 
 		ShowWindow(m_Window, SW_SHOW);
+
+		UINT createDeviceFlags = 0;
+		#if defined(DEBUG) || defined(_DEBUG)
+			createDeviceFlags |= D3D11_CREATE_DEVICE_DEBUG;
+		#endif
+
+		D3D_FEATURE_LEVEL featureLevel;
+		HRESULT hr = D3D11CreateDevice(
+			nullptr,
+			D3D_DRIVER_TYPE_HARDWARE,
+			nullptr,
+			createDeviceFlags,
+			nullptr, 0,
+			D3D11_SDK_VERSION,
+			device.GetAddressOf(),
+			&featureLevel,
+			context.GetAddressOf()
+		);
+
+		NOS_CORE_ASSERT(SUCCEEDED(hr), "D3D11CreateDevice failed!");
+
+		NOS_CORE_ASSERT(featureLevel == D3D_FEATURE_LEVEL_11_0, "D3D11CreateDevice failed!");
+
+		//Describing the Swap chain
+		DXGI_SWAP_CHAIN_DESC sd;
+		sd.BufferDesc.Width = m_Data.Width;
+		sd.BufferDesc.Height = m_Data.Height;
+		sd.BufferDesc.RefreshRate.Numerator = 60;
+		sd.BufferDesc.RefreshRate.Denominator = 1;
+		sd.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+		sd.BufferDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED;
+		sd.BufferDesc.Scaling = DXGI_MODE_SCALING_UNSPECIFIED;
+
+		sd.SampleDesc.Count = 1;
+		sd.SampleDesc.Quality = 0;
+
+		sd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
+		sd.BufferCount = 1;
+		sd.OutputWindow = m_Window;
+		sd.Windowed = true;
+		sd.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
+		sd.Flags = 0;
+
+		//Creating the swap chain
+		Microsoft::WRL::ComPtr<IDXGIDevice> dxgiDevice;
+		NOS_CORE_ASSERT(SUCCEEDED(device->QueryInterface(__uuidof(IDXGIDevice),
+			(void**)dxgiDevice.GetAddressOf())), "Failed to get IDXGIDevice!");
+
+		Microsoft::WRL::ComPtr<IDXGIAdapter> dxgiAdapter;
+		NOS_CORE_ASSERT(SUCCEEDED(dxgiDevice->GetParent(__uuidof(IDXGIAdapter),
+			(void**)dxgiAdapter.GetAddressOf())), "Failed to get IDXGIAdapter!");
+
+		Microsoft::WRL::ComPtr<IDXGIFactory> dxgiFactory;
+		NOS_CORE_ASSERT(SUCCEEDED(dxgiAdapter->GetParent(__uuidof(IDXGIFactory),
+			(void**)dxgiFactory.GetAddressOf())), "Failed to get IDXGIFactory!");
+
+		NOS_CORE_ASSERT(SUCCEEDED(dxgiFactory->CreateSwapChain(device.Get(), &sd,
+			swapChain.GetAddressOf())), "Failed to create swap chain!");
+
+		//Render Target View
+		Microsoft::WRL::ComPtr<ID3D11Texture2D> backBuffer;
+		swapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)backBuffer.GetAddressOf());
+		device->CreateRenderTargetView(backBuffer.Get(), 0, renderTargetView.GetAddressOf());
+
+		//Depth/Stencil Buffer & View
+		D3D11_TEXTURE2D_DESC depthStencilDesc;
+		depthStencilDesc.Width = m_Data.Width;
+		depthStencilDesc.Height = m_Data.Height;
+		depthStencilDesc.MipLevels = 1;
+		depthStencilDesc.ArraySize = 1;
+		depthStencilDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
+
+		depthStencilDesc.SampleDesc.Count = 1;
+		depthStencilDesc.SampleDesc.Quality = 0;
+
+		depthStencilDesc.Usage = D3D11_USAGE_DEFAULT;
+		depthStencilDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
+		depthStencilDesc.CPUAccessFlags = 0;
+		depthStencilDesc.MiscFlags = 0;
+
+		device->CreateTexture2D(&depthStencilDesc, 0, depthStencilBuffer.GetAddressOf());
+		device->CreateDepthStencilView(depthStencilBuffer.Get(), 0, depthStencilView.GetAddressOf());
+
+		//Binding Views to Output Merger State
+		ID3D11RenderTargetView* rtv[] = {renderTargetView.Get()};
+		context->OMSetRenderTargets(1, rtv, depthStencilView.Get());
+
+		//Set the Viewport
+		D3D11_VIEWPORT vp;
+		vp.TopLeftX = 0.0f;
+		vp.TopLeftY = 0.0f;
+		vp.Width = static_cast<float>(m_Data.Width);
+		vp.Height = static_cast<float>(m_Data.Height);
+		vp.MinDepth = 0.0f;
+		vp.MaxDepth = 1.0f;
+
+		context->RSSetViewports(1, &vp);
+
 		SetVSync(true);
 	}
 	void WindowsWindow::Shutdown() {
@@ -75,12 +173,18 @@ namespace nOs {
 		}
 	}
 
-	void WindowsWindow::OnUpdate() {
+	void WindowsWindow::OnUpdate() {		
 		MSG msg;
 		while (PeekMessageW(&msg, NULL, 0, 0, PM_REMOVE)) {
 			TranslateMessage(&msg);
 			DispatchMessageW(&msg);
 		}
+
+		float clearColor[4] = { 0.6f, 0.4f, 0.8f, 1.0f };
+		context->ClearRenderTargetView(renderTargetView.Get(), clearColor);
+		context->ClearDepthStencilView(depthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+
+		swapChain->Present(0, 0);
 	}
 
 	void WindowsWindow::SetVSync(bool enabled) {
@@ -179,9 +283,8 @@ namespace nOs {
 				window->m_Data.EventCallback(event);
 				return 0;
 			}
+			}
 		}
-	}
 	return DefWindowProcW(hwnd, uMsg, wParam, lParam);
+	}
 }
-}
-

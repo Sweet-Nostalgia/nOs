@@ -24,13 +24,6 @@ public:
 		return m_Level;
 	}
 
-	//void trace(const std::string& msg);
-	//void debug(const std::string& msg);
-	//void info(const std::string& msg);
-	//void warn(const std::string& msg);
-	//void error(const std::string& msg);
-	//void fatal(const std::string& msg);
-
 	template<typename... Args>
 	void trace(const std::string& format, Args&&... args) {
 		if (m_Level <= LogLevel::Trace) {

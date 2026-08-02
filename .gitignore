@@ -1,19 +1,19 @@
 # Directories
+*.dir/
 .vs/
-ALL_BUILD.dir/
 bin/
 bin-int/
-Boost.dir/
 build/
 CMakeFiles/
 Debug/
-nOs.dir/
 out/
 x64/
-ZERO_CHECK.dir/
 
 #Files
 *.bat
 *.cmake
+*.ninja
 *.user
+.ninja_deps
+.ninja_log
 CMakeCache.txt

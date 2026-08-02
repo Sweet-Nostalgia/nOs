@@ -1,5 +1,6 @@
 #include <iostream>
 #include <nOs.h>
+#include <nOs/EntryPoint.h>
 
 class Boost : public nOs::Application {
 public:
@@ -14,5 +15,3 @@ public:
 nOs::Application* nOs::CreateApplication() {
 	return new Boost();
 }
-
-#include <nOs/EntryPoint.h>

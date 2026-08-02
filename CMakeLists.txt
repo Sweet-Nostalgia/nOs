@@ -11,23 +11,20 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(OUTPUT_DIR_NAME "$<CONFIG>-x64")
 
 set(LOCAL_NOS_BIN   "${CMAKE_SOURCE_DIR}/bin/${OUTPUT_DIR_NAME}/nOs")
+set(LOCAL_NOS_INT   "${CMAKE_SOURCE_DIR}/bin-int/${OUTPUT_DIR_NAME}/nOs")
+
 set(LOCAL_BOOST_BIN "${CMAKE_SOURCE_DIR}/bin/${OUTPUT_DIR_NAME}/Boost")
+set(LOCAL_BOOST_INT "${CMAKE_SOURCE_DIR}/bin-int/${OUTPUT_DIR_NAME}/Boost")
 
 add_library(nOs SHARED)
 
-# ===== nOs Library Source Files =====
 target_sources(nOs PRIVATE
-    # Logger
     "${CMAKE_CURRENT_SOURCE_DIR}/nOs/log/Logger.h"
     "${CMAKE_CURRENT_SOURCE_DIR}/nOs/log/Logger.cpp"
-    
-    # Events
     "${CMAKE_CURRENT_SOURCE_DIR}/nOs/src/nOs/Events/ApplicationEvent.h"
     "${CMAKE_CURRENT_SOURCE_DIR}/nOs/src/nOs/Events/Event.h"
     "${CMAKE_CURRENT_SOURCE_DIR}/nOs/src/nOs/Events/KeyEvent.h"
     "${CMAKE_CURRENT_SOURCE_DIR}/nOs/src/nOs/Events/MouseEvent.h"
-    
-    # Core
     "${CMAKE_CURRENT_SOURCE_DIR}/nOs/src/nOs/Application.h"
     "${CMAKE_CURRENT_SOURCE_DIR}/nOs/src/nOs/Application.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/nOs/src/nOs/Core.h"
@@ -39,26 +36,19 @@ target_sources(nOs PRIVATE
     "${CMAKE_CURRENT_SOURCE_DIR}/nOs/src/nOs/LayerStack.h"
     "${CMAKE_CURRENT_SOURCE_DIR}/nOs/src/nOs/LayerStack.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/nOs/src/nOs/Window.h"
-    
-    # Platform (Win32)
-    "${CMAKE_CURRENT_SOURCE_DIR}/nOs/src/Platform/WindowsWindow.h"
-    "${CMAKE_CURRENT_SOURCE_DIR}/nOs/src/Platform/WindowsWindow.cpp"
-    
-    # Main header
+    "${CMAKE_CURRENT_SOURCE_DIR}/nOs/src/Platform/Windows/WindowsWindow.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/nOs/src/Platform/Windows/WindowsWindow.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/nOs/src/nOs.h"
-    
-    # Precompiled header
     "${CMAKE_CURRENT_SOURCE_DIR}/nOs/src/nospch.h"
     "${CMAKE_CURRENT_SOURCE_DIR}/nOs/src/nospch.cpp"
 )
 
-# ===== Visual Studio Folder Organization =====
 source_group("Log" FILES
     "${CMAKE_CURRENT_SOURCE_DIR}/nOs/log/Logger.h"
     "${CMAKE_CURRENT_SOURCE_DIR}/nOs/log/Logger.cpp"
 )
 
-source_group("Events" FILES
+source_group("Core\\Events" FILES
     "${CMAKE_CURRENT_SOURCE_DIR}/nOs/src/nOs/Events/ApplicationEvent.h"
     "${CMAKE_CURRENT_SOURCE_DIR}/nOs/src/nOs/Events/Event.h"
     "${CMAKE_CURRENT_SOURCE_DIR}/nOs/src/nOs/Events/KeyEvent.h"
@@ -80,8 +70,8 @@ source_group("Core" FILES
 )
 
 source_group("Platform\\Win32" FILES
-    "${CMAKE_CURRENT_SOURCE_DIR}/nOs/src/Platform/WindowsWindow.h"
-    "${CMAKE_CURRENT_SOURCE_DIR}/nOs/src/Platform/WindowsWindow.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/nOs/src/Platform/Windows/WindowsWindow.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/nOs/src/Platform/Windows/WindowsWindow.cpp"
 )
 
 source_group("" FILES
@@ -103,8 +93,11 @@ set_target_properties(nOs PROPERTIES
     ARCHIVE_OUTPUT_DIRECTORY "${LOCAL_NOS_BIN}"
     LIBRARY_OUTPUT_DIRECTORY "${LOCAL_NOS_BIN}"
     RUNTIME_OUTPUT_DIRECTORY "${LOCAL_NOS_BIN}"
+    OBJECT_OUTPUT_DIRECTORY  "${LOCAL_NOS_INT}"
     MSVC_RUNTIME_LIBRARY     "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL"
 )
+
+target_link_libraries(nOs PRIVATE d3d11 dxgi)
 
 if(WIN32)
     target_compile_definitions(nOs PRIVATE 
@@ -113,7 +106,12 @@ if(WIN32)
     )
 endif()
 
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    target_compile_definitions(nOs PRIVATE NOS_ENABLE_ASSERTS)
+endif()
+
 target_compile_definitions(nOs PRIVATE
+    $<$<CONFIG:Debug>:NOS_ENABLE_ASSERTS>
     $<$<CONFIG:Release>:NOS_RELEASE>
     $<$<CONFIG:Dist>:NOS_DIST>
 )
@@ -131,6 +129,7 @@ source_group("" FILES
 target_include_directories(Boost PRIVATE 
     "${CMAKE_CURRENT_SOURCE_DIR}/nOs/log"
     "${CMAKE_CURRENT_SOURCE_DIR}/nOs/src"
+    MSVC_RUNTIME_LIBRARY     "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL"
 )
 
 set_target_properties(Boost PROPERTIES
@@ -146,7 +145,12 @@ if(WIN32)
     )
 endif()
 
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    target_compile_definitions(Boost PRIVATE NOS_ENABLE_ASSERTS)
+endif()
+
 target_compile_definitions(Boost PRIVATE
+    $<$<CONFIG:Debug>:NOS_ENABLE_ASSERTS>
     $<$<CONFIG:Release>:NOS_RELEASE>
     $<$<CONFIG:Dist>:NOS_DIST>
 )
@@ -157,3 +161,5 @@ add_custom_command(TARGET Boost POST_BUILD
         "${LOCAL_BOOST_BIN}/$<TARGET_FILE_NAME:nOs>"
     COMMENT "Copying nOs.dll next to Boost.exe inside the local bin directory..."
 )
+
+set(CMAKE_VS_STARTUP_PROJECT "Boost")

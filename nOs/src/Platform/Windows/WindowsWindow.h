@@ -45,5 +45,12 @@ namespace nOs {
 		};
 
 		WindowData m_Data;
+
+		Microsoft::WRL::ComPtr<ID3D11Device>			device;
+		Microsoft::WRL::ComPtr<ID3D11DeviceContext>		context;
+		Microsoft::WRL::ComPtr<IDXGISwapChain>			swapChain;
+		Microsoft::WRL::ComPtr<ID3D11RenderTargetView>	renderTargetView;
+		Microsoft::WRL::ComPtr<ID3D11Texture2D>			depthStencilBuffer;
+		Microsoft::WRL::ComPtr<ID3D11DepthStencilView>	depthStencilView;
 	};
 }

@@ -7,8 +7,6 @@ namespace nOs {
 
 	void Log::Init() { 
 		s_CoreLogger = Logger::create("nOs");
-		s_CoreLogger->trace("Core Logger Initialized");
 		s_ClientLogger = Logger::create("App");
-		s_ClientLogger->trace("Client Logger Initialized");
 	}
 }
