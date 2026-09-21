@@ -7,6 +7,21 @@
     <ClCompile Include="D:\Dev\nOs\nOs\log\Logger.cpp">
       <Filter>Log</Filter>
     </ClCompile>
+    <ClCompile Include="D:\Dev\nOs\nOs\src\nOs\Renderer\Buffer.cpp">
+      <Filter>Core\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Dev\nOs\nOs\src\nOs\Renderer\RenderCommand.cpp">
+      <Filter>Core\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Dev\nOs\nOs\src\nOs\Renderer\Renderer.cpp">
+      <Filter>Core\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Dev\nOs\nOs\src\nOs\Renderer\RendererAPI.cpp">
+      <Filter>Core\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Dev\nOs\nOs\src\nOs\Renderer\Shader.cpp">
+      <Filter>Core\Renderer</Filter>
+    </ClCompile>
     <ClCompile Include="D:\Dev\nOs\nOs\src\nOs\Application.cpp">
       <Filter>Core</Filter>
     </ClCompile>
@@ -19,8 +34,17 @@
     <ClCompile Include="D:\Dev\nOs\nOs\src\nOs\LayerStack.cpp">
       <Filter>Core</Filter>
     </ClCompile>
+    <ClCompile Include="D:\Dev\nOs\nOs\src\Platform\DirectX\DirectXBuffer.cpp">
+      <Filter>Platform\DirectX</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Dev\nOs\nOs\src\Platform\DirectX\DirectXContext.cpp">
+      <Filter>Platform\DirectX</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Dev\nOs\nOs\src\Platform\DirectX\DirectXRendererAPI.cpp">
+      <Filter>Platform\DirectX</Filter>
+    </ClCompile>
     <ClCompile Include="D:\Dev\nOs\nOs\src\Platform\Windows\WindowsWindow.cpp">
-      <Filter>Platform\Win32</Filter>
+      <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="D:\Dev\nOs\nOs\src\nospch.cpp" />
   </ItemGroup>
@@ -39,6 +63,24 @@
     </ClInclude>
     <ClInclude Include="D:\Dev\nOs\nOs\src\nOs\Events\MouseEvent.h">
       <Filter>Core\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Dev\nOs\nOs\src\nOs\Renderer\Buffer.h">
+      <Filter>Core\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Dev\nOs\nOs\src\nOs\Renderer\GraphicsContext.h">
+      <Filter>Core\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Dev\nOs\nOs\src\nOs\Renderer\RenderCommand.h">
+      <Filter>Core\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Dev\nOs\nOs\src\nOs\Renderer\Renderer.h">
+      <Filter>Core\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Dev\nOs\nOs\src\nOs\Renderer\RendererAPI.h">
+      <Filter>Core\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Dev\nOs\nOs\src\nOs\Renderer\Shader.h">
+      <Filter>Core\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="D:\Dev\nOs\nOs\src\nOs\Application.h">
       <Filter>Core</Filter>
@@ -61,8 +103,17 @@
     <ClInclude Include="D:\Dev\nOs\nOs\src\nOs\Window.h">
       <Filter>Core</Filter>
     </ClInclude>
+    <ClInclude Include="D:\Dev\nOs\nOs\src\Platform\DirectX\DirectXBuffer.h">
+      <Filter>Platform\DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Dev\nOs\nOs\src\Platform\DirectX\DirectXContext.h">
+      <Filter>Platform\DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Dev\nOs\nOs\src\Platform\DirectX\DirectXRendererAPI.h">
+      <Filter>Platform\DirectX</Filter>
+    </ClInclude>
     <ClInclude Include="D:\Dev\nOs\nOs\src\Platform\Windows\WindowsWindow.h">
-      <Filter>Platform\Win32</Filter>
+      <Filter>Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="D:\Dev\nOs\nOs\src\nOs.h" />
     <ClInclude Include="D:\Dev\nOs\nOs\src\nospch.h" />
@@ -83,11 +134,22 @@
     <CustomBuild Include="D:\Dev\nOs\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
+    <FXCompile Include="D:\Dev\nOs\nOs\src\nOs\Renderer\PixelShader.hlsl">
+      <Filter>Core\Renderer</Filter>
+    </FXCompile>
+    <FXCompile Include="D:\Dev\nOs\nOs\src\nOs\Renderer\VertexShader.hlsl">
+      <Filter>Core\Renderer</Filter>
+    </FXCompile>
+  </ItemGroup>
+  <ItemGroup>
     <Filter Include="Core">
       <UniqueIdentifier>{CC808266-8A91-37C1-A4BC-8E32A3B21A49}</UniqueIdentifier>
     </Filter>
     <Filter Include="Core\Events">
       <UniqueIdentifier>{DA321CEA-0499-374A-A693-BA17FB935190}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Renderer">
+      <UniqueIdentifier>{55027BA8-3EFB-3714-BCFD-F5BC4430C56A}</UniqueIdentifier>
     </Filter>
     <Filter Include="Log">
       <UniqueIdentifier>{2090AD98-DBBA-3995-B3C0-57C1D4956FCB}</UniqueIdentifier>
@@ -95,8 +157,11 @@
     <Filter Include="Platform">
       <UniqueIdentifier>{FD8AB4AC-E01C-327F-8187-85C378DEB73E}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Platform\Win32">
-      <UniqueIdentifier>{7A35CD68-8841-30AA-9792-72B0C9D45100}</UniqueIdentifier>
+    <Filter Include="Platform\DirectX">
+      <UniqueIdentifier>{69EE47D6-DDAB-355A-ACD7-A7B3B5A5D9BB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform\Windows">
+      <UniqueIdentifier>{6F111FB5-873D-37FD-B659-8DA6F7A3D318}</UniqueIdentifier>
     </Filter>
     <Filter Include="Precompile Header File">
       <UniqueIdentifier>{76A4DF3D-FFDE-3037-A70B-905E2B66458B}</UniqueIdentifier>

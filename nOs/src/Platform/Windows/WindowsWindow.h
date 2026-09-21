@@ -1,8 +1,10 @@
 #pragma once
 
 #include "nOs/Window.h"
+#include "nOs/Renderer/GraphicsContext.h"
 
 #include "nospch.h"
+
 
 namespace nOs {
 	class WindowsWindow : public Window {
@@ -27,6 +29,15 @@ namespace nOs {
 		void SetVSync(bool enabled) override;
 		bool IsVSync() const override;
 
+		inline virtual void* GetNativeWindow() const {
+			return m_Window;
+		}
+
+		//TODO: Remove this when the renderer abstraction is built
+		GraphicsContext* GetGraphicsContext() const{
+			return m_Context;
+		}
+
 	private:
 		virtual void Init(const WindowProps& props);
 		virtual void Shutdown();
@@ -35,22 +46,17 @@ namespace nOs {
 
 	private:
 		HWND m_Window;
+		GraphicsContext* m_Context;
 
 		struct WindowData {
-			std::string Title;
-			unsigned int Width, Height;
-			bool VSync;
+			std::string Title = "nOs Engine";
+			unsigned int Width = 1280;
+			unsigned int Height = 720;
+			bool VSync = false;
 
-			EventCallbackFn EventCallback;
+			EventCallbackFn EventCallback = [](Event&) {};
 		};
 
 		WindowData m_Data;
-
-		Microsoft::WRL::ComPtr<ID3D11Device>			device;
-		Microsoft::WRL::ComPtr<ID3D11DeviceContext>		context;
-		Microsoft::WRL::ComPtr<IDXGISwapChain>			swapChain;
-		Microsoft::WRL::ComPtr<ID3D11RenderTargetView>	renderTargetView;
-		Microsoft::WRL::ComPtr<ID3D11Texture2D>			depthStencilBuffer;
-		Microsoft::WRL::ComPtr<ID3D11DepthStencilView>	depthStencilView;
 	};
 }

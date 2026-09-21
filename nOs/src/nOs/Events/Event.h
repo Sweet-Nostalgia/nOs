@@ -44,6 +44,8 @@ namespace nOs {
 			return GetCategoryFlags() & category;
 		}
 
+		bool IsHandled() const { return m_Handled; }
+	
 	protected:
 		bool m_Handled = false;
 	};

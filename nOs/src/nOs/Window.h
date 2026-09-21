@@ -6,6 +6,7 @@
 #include "nOs/Events/Event.h"
 
 namespace nOs {
+	class GraphicsContext;
 	struct WindowProps {
 		std::string Title;
 		unsigned int Width;
@@ -26,12 +27,16 @@ namespace nOs {
 
 		virtual void OnUpdate() = 0;
 
-		virtual uint32_t GetWidth() const = 0;
-		virtual uint32_t GetHeight() const = 0;
+		virtual UINT GetWidth() const = 0;
+		virtual UINT GetHeight() const = 0;
 
 		virtual void SetEventCallback(const EventCallbackFn& callback) = 0;
 		virtual void SetVSync(bool enabled) = 0;
 		virtual bool IsVSync() const = 0;
+
+		virtual void* GetNativeWindow() const = 0;
+
+		virtual GraphicsContext* GetGraphicsContext() const = 0;
 
 		static Window* Create(const WindowProps& props = WindowProps());
 	};
